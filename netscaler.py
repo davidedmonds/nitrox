@@ -23,9 +23,11 @@ logger = logging.getLogger('docker_netscaler')
 def ns_session_scope(func):
     @wraps(func)
     def login_logout(self, *args, **kwargs):
-        self.ns_session = nitro_service(self.nsip, 'HTTP')
+        self.ns_session = nitro_service(self.nsip, 'HTTPS')
         self.ns_session.set_credential(self.nslogin, self.nspasswd)
         self.ns_session.timeout = 600
+        self.ns_session.certvalidation = False
+        self.ns_session.hostnameverification = False
         self.ns_session.login()
         result = func(self, *args, **kwargs)
         self.ns_session.logout()
