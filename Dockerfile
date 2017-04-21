@@ -20,4 +20,4 @@ COPY marathon/ /usr/src/app/marathon/
 COPY kubernetes/ /usr/src/app/kubernetes/
 COPY consul/ /usr/src/app/consul/
 
-ENTRYPOINT ["python", "/usr/src/app/main.py" ]
+ENTRYPOINT ["python", "-W", "ignore", "/usr/src/app/main.py" ]
